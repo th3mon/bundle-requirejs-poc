@@ -1,5 +1,5 @@
 requirejs.config({
-  baseUrl: "scripts",
+  baseUrl: "scr",
 });
 
 requirejs(["main"]);
