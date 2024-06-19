@@ -33,7 +33,6 @@ async function clean() {
   return del.deleteAsync(["dist/**", "!dist"], { force: true });
 }
 
-exports.build = jsBundle;
 exports.default = series(
   clean,
   parallel(jsBundle, copyVendorFiles, copyCSSFiles, copyHTMLFiles),
