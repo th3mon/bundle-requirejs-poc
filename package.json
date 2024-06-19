@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "http-server",
-    "start:dist": "http-server dist"
+    "start:dist": "http-server dist",
+    "build": "gulp"
   },
   "keywords": [],
   "author": "",
