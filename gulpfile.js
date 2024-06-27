@@ -1,18 +1,25 @@
+const concat = require("gulp-concat");
 const uglify = require("gulp-uglify");
 const rename = require("gulp-rename");
 const requirejsOptimize = require("gulp-requirejs-optimize");
 const { src, dest, parallel, series } = require("gulp");
 
+// INFO: wywołanie poniższej linii generuje ten sam błąd co plugpluginu requirejsOptimize.
+// npx r.js -o name=main out=built.js baseUrl=src mainConfigFile=src/boot.js
 function jsBundle() {
-  return src("src/main.js")
-    .pipe(
-      requirejsOptimize({
-        optimize: "none",
-        out: "app-bundle.js",
-      }),
-    )
-    .pipe(uglify())
-    .pipe(dest("dist"));
+  return (
+    src(["src/**/*.js", "!src/**/main.js"])
+      .pipe(
+        requirejsOptimize({
+          // name: "boot",
+          optimize: "none",
+          mainConfigFile: "src/boot.js", // INFO: Poprawna wartość
+        }),
+      )
+      .pipe(concat("app-bundle.js"))
+      // .pipe(uglify())
+      .pipe(dest("dist"))
+  );
 }
 
 function copyVendorFiles() {
